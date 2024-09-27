@@ -1,13 +1,12 @@
 import { defineConfig } from 'electron-vite';
 import { defineConfig as defineViteConfig } from 'vite';
 import { resolve } from 'path';
-import viteChecker from 'vite-plugin-checker';
 import viteCp from 'vite-plugin-cp';
 import viteZipPack from 'unplugin-zip-pack/vite';
 import PluginManifest from './manifest.json';
 
 const SRC_DIR = resolve(__dirname, './src');
-const OUTPUT_DIR = resolve(__dirname, '../plugins/whale');
+const OUTPUT_DIR = resolve(__dirname, '../LiteLoaderQQNT/plugins/whale');
 
 const BaseConfig = defineViteConfig({
   root: __dirname,
@@ -21,14 +20,7 @@ const BaseConfig = defineViteConfig({
 const ConfigBuilder = (type: 'main' | 'preload') => defineViteConfig({
   ...BaseConfig,
 
-  plugins: [
-    viteChecker({
-      typescript: true,
-      eslint: {
-        lintCommand: 'eslint --fix src/**/*',
-      },
-    }),
-  ],
+  plugins: [],
   build: {
     minify: true,
     outDir: resolve(OUTPUT_DIR, `./${type}`),
@@ -47,14 +39,8 @@ export default defineConfig({
     ...BaseConfig,
 
     plugins: [
-      viteChecker({
-        typescript: true,
-        eslint: {
-          lintCommand: 'eslint --fix src/**/*',
-        },
-      }),
       viteCp({
-        targets: [{ src: './manifest.json', dest: '../plugins/whale' }],
+        targets: [{ src: './manifest.json', dest: '../LiteLoaderQQNT/plugins/whale' }],
       }),
       viteZipPack({
         in: OUTPUT_DIR,
