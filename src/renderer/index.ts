@@ -18,12 +18,6 @@ export function getQRcode() {
   if (location.pathname !== "/renderer/login.html") {
     return "";
   }
-  const qButtonSlotWarp = document.querySelector(
-    ".q-button__slot-warp",
-  ) as HTMLButtonElement;
-  if (qButtonSlotWarp) {
-    qButtonSlotWarp.click();
-  }
   const qrcodeErrorExpiredLabel = document.querySelector(
     ".qrcode-error.expired-label",
   ) as HTMLElement;
