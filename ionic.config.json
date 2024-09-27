@@ -1,8 +1,0 @@
-{
-  "name": "whale",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "vue-vite",
-  "id": "5b63c385"
-}

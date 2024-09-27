@@ -1,0 +1,35 @@
+{
+    "$schema": "./manifest_schema.json",
+    "manifest_version": 4,
+    "type": "extension",
+    "name": "whale",
+    "slug": "LoginAtTerminal",
+    "description": "login qq at terminal",
+    "version": "0.1.0",
+    "icon": "./icon.png",
+    "thumb": "./icon.svg",
+    "authors": [
+        {
+            "name": "initialenconter",
+            "link": "https://github.com/initialenconter"
+        }
+    ],
+    "platform": [
+        "win32",
+        "linux",
+        "darwin"
+    ],
+    "injects": {
+        "renderer": "./renderer/index.js",
+        "main": "./main/index.js",
+        "preload": "./preload/index.js"
+    },
+    "repository": {
+        "repo": "initialenconter/whale",
+        "branch": "main",
+        "release": {
+            "tag": "0.1.0",
+            "file": "whale.zip"
+        }
+    }
+}

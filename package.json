@@ -1,43 +1,46 @@
 {
-  "name": "whale",
-  "private": true,
-  "version": "0.0.1",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "preview": "vite preview",
-    "test:e2e": "cypress run",
-    "test:unit": "vitest",
-    "lint": "eslint ."
-  },
-  "dependencies": {
-    "@capacitor/app": "6.0.1",
-    "@capacitor/core": "6.1.2",
-    "@capacitor/haptics": "6.0.1",
-    "@capacitor/keyboard": "6.0.2",
-    "@capacitor/status-bar": "6.0.1",
-    "@ionic/vue": "^8.0.0",
-    "@ionic/vue-router": "^8.0.0",
-    "ionicons": "^7.0.0",
-    "vue": "^3.3.0",
-    "vue-router": "^4.2.0"
-  },
-  "devDependencies": {
-    "@capacitor/cli": "6.1.2",
-    "@vitejs/plugin-legacy": "^5.0.0",
-    "@vitejs/plugin-vue": "^4.0.0",
-    "@vue/eslint-config-typescript": "^12.0.0",
-    "@vue/test-utils": "^2.3.0",
-    "cypress": "^13.5.0",
-    "eslint": "^8.35.0",
-    "eslint-plugin-vue": "^9.9.0",
-    "jsdom": "^22.1.0",
-    "terser": "^5.4.0",
-    "typescript": "^5.1.6",
-    "vite": "~5.2.0",
-    "vitest": "^0.34.6",
-    "vue-tsc": "^2.0.22"
-  },
-  "description": "An Ionic project"
+    "name": "whale",
+    "version": "0.1.0",
+    "description": "login qq at terminal",
+    "main": "index.js",
+    "scripts": {
+        "set-proxy": "npm config set registry https://registry.npmmirror.com",
+        "unset-proxy": "npm config delete registry",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "eslint --fix src/**/*.ts",
+        "format": "prettier --write src/*/*.ts",
+        "build": "electron-vite build"
+    },
+    "author": {
+        "name": "initencounter",
+        "email": "2911583893@qq.com",
+        "url": "https://github.com/initialencounter"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/initialencounter/whale.git"
+    },
+    "bugs": {
+        "url": "https://github.com/initialencounter/whale/issues"
+    },
+    "homepage": "https://whale.initenc.cn",
+    "license": "AGPL-3.0",
+    "devDependencies": {
+        "@electron-toolkit/eslint-config-ts": "^1.0.1",
+        "@electron-toolkit/tsconfig": "^1.0.1",
+        "@eslint/js": "^9.11.1",
+        "@typescript-eslint/eslint-plugin": "^7.2.0",
+        "@typescript-eslint/parser": "^7.2.0",
+        "electron": "^29.1.4",
+        "electron-vite": "^2.1.0",
+        "eslint": "^8.57.1",
+        "globals": "^15.9.0",
+        "typescript-eslint": "^8.7.0",
+        "unplugin-zip-pack": "^1.0.1",
+        "vite-plugin-checker": "^0.6.4",
+        "vite-plugin-cp": "^4.0.8",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.2.1",
+        "prettier": "^3.3.3"
+    }
 }
