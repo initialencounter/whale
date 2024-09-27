@@ -1,7 +1,7 @@
 // 运行在 Electron 主进程 下的插件入口
 import { BrowserWindow, ipcMain, webContents } from "electron";
 import fs from "fs";
-// Fork from https://github.com/kingsword09/ts-qrcode-terminal
+// Fork from https://github.com/cnuebred/qrcode.ts
 import { QRcode } from "./qrcode.ts/src/qr_code";
 import { decodeQR } from "./decodeQR";
 const logStyles = {
