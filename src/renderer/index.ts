@@ -21,7 +21,7 @@ export function getQRcode() {
   const qrcodeErrorExpiredLabel = document.querySelector(
     ".qrcode-error.expired-label",
   ) as HTMLElement;
-  if (qrcodeErrorExpiredLabel.innerText === "当前二维码已过期") {
+  if (qrcodeErrorExpiredLabel?.innerText === "当前二维码已过期") {
     const secondaryQbutton = document.querySelector(
       ".q-button.q-button--secondary.q-button--default",
     ) as HTMLButtonElement;
@@ -38,11 +38,6 @@ let lastQRCode: string;
 const LoginInterval = setInterval(async () => {
   const isLogin = await window.LoginAtTerminal.getLoginState();
   if (isLogin) {
-    window.LoginAtTerminal.logInfo({
-      level: "info",
-      title: "LoginAtTerminal",
-      message: "",
-    });
     clearInterval(LoginInterval);
   }
   await window.LoginAtTerminal.logInfo({
