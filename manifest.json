@@ -5,7 +5,7 @@
     "name": "whale",
     "slug": "whale",
     "description": "login qq at terminal",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "icon": "./icon.png",
     "thumb": "./icon.svg",
     "authors": [
@@ -28,7 +28,7 @@
         "repo": "initialencounter/whale",
         "branch": "main",
         "release": {
-            "tag": "0.1.0",
+            "tag": "0.1.1",
             "file": "whale.zip"
         }
     }
