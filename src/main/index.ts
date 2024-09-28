@@ -4,6 +4,9 @@ import fs from "fs";
 // Fork from https://github.com/cnuebred/qrcode.ts
 import { QRcode } from "./qrcode.ts/src/qr_code";
 import { decodeQR } from "./decodeQR";
+import { resolve } from "path";
+import os from 'os';
+
 const logStyles = {
   info: "\x1b[34m", // 蓝色
   warning: "\x1b[33m", // 黄色
@@ -44,11 +47,12 @@ ipcMain.handle("LiteLoader.LoginAtTerminal.pushQRCode", async (_, data) => {
   const res = await decodeQR(data);
   new QRcode(res, { minErrorLevel: "L" }).render();
   const buf = Buffer.from(data.slice(22), "base64");
-  fs.writeFileSync("/LiteLoader/plugins/qrcode.png", buf);
+  const QRCodeStorePath = resolve(os.homedir(), "qqLoginQRCode.png");
+  fs.writeFileSync(QRCodeStorePath, buf);
   logMessage(
     "success",
     "LoginAtTerminal",
-    "登录二维码已保存到 /LiteLoader/plugins/qrcode.png",
+    "登录二维码已保存到 " + QRCodeStorePath,
   );
 });
 
