@@ -14,10 +14,19 @@ declare global {
     }
   }
 
-export function getQRcode() {
+async function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+export async function getQRcode() {
   if (location.pathname !== "/renderer/login.html") {
     return "";
   }
+  const autoLoginButton = document.querySelector(".q-button.q-button--primary.q-button--default.login-btn") as HTMLButtonElement;
+  if (autoLoginButton) {
+    sleep(1000)
+    autoLoginButton.click()
+  };
   const qrcodeErrorExpiredLabel = document.querySelector(
     ".qrcode-error.expired-label",
   ) as HTMLElement;
@@ -45,7 +54,7 @@ const LoginInterval = setInterval(async () => {
     title: "LoginAtTerminal",
     message: "登录二维码推送中...",
   });
-  const url = getQRcode();
+  const url = await getQRcode();
   if (!url) return;
   if (url === lastQRCode) return;
   lastQRCode = url;
