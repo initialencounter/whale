@@ -1,6 +1,6 @@
 {
     "name": "whale",
-    "version": "0.1.1",
+    "version": "0.1.3",
     "description": "login qq at terminal",
     "main": "index.js",
     "scripts": {
