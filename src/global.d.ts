@@ -7,8 +7,6 @@ declare namespace LoginAtTerminal {
     message: string;
   }) => void;
   const pushQRCode: (content: string) => void;
-  const stopPushQRCode: (callback: Function) => void;
-  const getLoginState: () => boolean;
 }
 
 declare namespace LiteLoader {

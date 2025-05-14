@@ -1,11 +1,11 @@
 // 运行在 Electron 主进程 下的插件入口
-import { BrowserWindow, ipcMain, webContents } from "electron";
+import { ipcMain } from "electron";
 import fs from "fs";
 // Fork from https://github.com/cnuebred/qrcode.ts
 import { QRcode } from "./qrcode.ts/src/qr_code";
 import { decodeQR } from "./decodeQR";
 import { resolve } from "path";
-import os from 'os';
+import os from "os";
 
 const logStyles = {
   info: "\x1b[34m", // 蓝色
@@ -30,14 +30,7 @@ function logMessage(
   console.log(`${style}[${timestamp}] [${title}] ${message}${logStyles.reset}`);
 }
 
-let mainWindow: BrowserWindow;
-let isLogin = false;
-
 logMessage("info", "LoginAtTerminal", "Running...");
-
-ipcMain.handle("LiteLoader.LoginAtTerminal.getLoginState", () => {
-  return isLogin;
-});
 
 ipcMain.handle("LiteLoader.LoginAtTerminal.logInfo", (_, data) => {
   logMessage(data.level, data.title, data.message);
@@ -55,24 +48,3 @@ ipcMain.handle("LiteLoader.LoginAtTerminal.pushQRCode", async (_, data) => {
     "登录二维码已保存到 " + QRCodeStorePath,
   );
 });
-
-// 创建窗口时触发
-exports.onBrowserWindowCreated = (window: BrowserWindow) => {
-  // window 为 Electron 的 BrowserWindow 实例
-  mainWindow = window;
-  mainWindow.webContents.send(
-    "LiteLoader.LoginAtTerminal.stopPushQRCode",
-    "结束 LoginInterval11111111111111",
-  );
-};
-
-// 用户登录时触发
-exports.onLogin = (uid: string) => {
-  // uid 为 账号 的 字符串 标识
-  logMessage("success", "LoginAtTerminal", "Login UID: " + uid);
-  // 停止推送二维码
-  isLogin = true;
-  webContents.getAllWebContents().forEach((webContent) => {
-    webContent.send("LiteLoader.LoginAtTerminal.stopPushQRCode");
-  });
-};

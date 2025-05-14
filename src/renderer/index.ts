@@ -1,32 +1,34 @@
 // 运行在 Electron 渲染进程 下的页面脚本
 declare global {
-    interface Window {
-      LoginAtTerminal: {
-        logInfo: (content: {
-          level: string;
-          title: string;
-          message: string;
-        }) => Promise<void>;
-        pushQRCode: (content: string) => Promise<void>;
-        stopPushQRCode: (callback) => Promise<void>;
-        getLoginState: () => Promise<boolean>;
-      };
-    }
+  interface Window {
+    LoginAtTerminal: {
+      logInfo: (content: {
+        level: string;
+        title: string;
+        message: string;
+      }) => Promise<void>;
+      pushQRCode: (content: string) => Promise<void>;
+      stopPushQRCode: (callback) => Promise<void>;
+      getLoginState: () => Promise<boolean>;
+    };
   }
+}
 
 async function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 export async function getQRcode() {
   if (location.pathname !== "/renderer/login.html") {
     return "";
   }
-  const autoLoginButton = document.querySelector(".q-button.q-button--primary.q-button--default.login-btn") as HTMLButtonElement;
+  const autoLoginButton = document.querySelector(
+    ".q-button.q-button--primary.q-button--default.login-btn",
+  ) as HTMLButtonElement;
   if (autoLoginButton) {
-    sleep(1000)
-    autoLoginButton.click()
-  };
+    sleep(1000);
+    autoLoginButton.click();
+  }
   const qrcodeErrorExpiredLabel = document.querySelector(
     ".qrcode-error.expired-label",
   ) as HTMLElement;
@@ -45,9 +47,10 @@ export async function getQRcode() {
 
 let lastQRCode: string;
 const LoginInterval = setInterval(async () => {
-  const isLogin = await window.LoginAtTerminal.getLoginState();
+  const isLogin = await getLoginState();
   if (isLogin) {
     clearInterval(LoginInterval);
+    return;
   }
   await window.LoginAtTerminal.logInfo({
     level: "info",
@@ -61,10 +64,14 @@ const LoginInterval = setInterval(async () => {
   window.LoginAtTerminal.pushQRCode(url);
 }, 5000);
 
-window.LoginAtTerminal.stopPushQRCode(async () => {
+async function getLoginState() {
+  if (location.pathname !== "/renderer/index.html") {
+    return false;
+  }
   await window.LoginAtTerminal.logInfo({
     level: "success",
     title: "SUCCESS",
     message: "登录成功！",
   });
-});
+  return true;
+}

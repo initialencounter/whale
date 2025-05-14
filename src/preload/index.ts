@@ -9,8 +9,4 @@ contextBridge.exposeInMainWorld("LoginAtTerminal", {
     ipcRenderer.invoke("LiteLoader.LoginAtTerminal.logInfo", content),
   pushQRCode: (content: string) =>
     ipcRenderer.invoke("LiteLoader.LoginAtTerminal.pushQRCode", content),
-  stopPushQRCode: (callback) =>
-    ipcRenderer.on("LiteLoader.LoginAtTerminal.stopPushQRCode", callback),
-  getLoginState: () =>
-    ipcRenderer.invoke("LiteLoader.LoginAtTerminal.getLoginState"),
 });
