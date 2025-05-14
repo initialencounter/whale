@@ -22,7 +22,7 @@ const ConfigBuilder = (type: 'main' | 'preload') => defineViteConfig({
 
   plugins: [],
   build: {
-    minify: true,
+    minify: false,
     outDir: resolve(OUTPUT_DIR, `./${type}`),
     lib: {
       entry: resolve(SRC_DIR, `./${type}/index.ts`),
@@ -48,7 +48,7 @@ export default defineConfig({
       }),
     ],
     build: {
-      minify: 'esbuild',
+      minify: false,
       outDir: resolve(OUTPUT_DIR, './renderer'),
       lib: {
         entry: resolve(SRC_DIR, './renderer/index.ts'),
